@@ -1,33 +1,26 @@
-#include <stdio.h>
 
-int main() {
+#include<stdio.h>
+void main()
+{
     int num;
-    printf("Enter a 4-digit number: ");
-    scanf("%d", &num);
-
-    
-    int n[4];
-    n[0] = num / 1000 % 10;
-    n[1] = num / 100 % 10;
-    n[2] = num / 10 % 10;
-    n[3] = num % 10;
-
-    printf("All possible numbers that can be formed using the digits ");
-    for (int i = 0; i < 4; i++) {
-        printf("%d", n[i]);
+    printf("\nEnter the number = ");
+    scanf("%d",&num);
+    int i,j,k,l,e=0,m,digit[4]={0};
+    for(i=0;i<4;i++)
+    {
+        digit[i]=num%10;
+        num/=10;
     }
-    printf(":\n");
-
-    
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
-            for (int k = 0; k < 4; k++) {
-                for (int l = 0; l < 4; l++) {
-                    printf("%d%d%d%d\n", n[i], n[j], n[k], n[l]);
-                }
-            }
-        }
+    int number[24]={0} ;
+    for(i=0;i<4;i++) 
+    for(j=0;j<4;j++)
+    for(k=0;k<4;k++)
+    for(l=0;l<4;l++)
+    if(i!=j && i!=k && i!=l && j!=k && j!=l && k!=l)
+    {
+        int newnum=1000*digit[i]+100*digit[j]+10*digit[k]+digit[l];
+        for(m=0;m<24;m++) if(number[m]==newnum) break;
+        if(m==24) number[e++]=newnum;
     }
-
-    return 0;
+    for(i=0;i<24;i++) if(number[i] != 0) printf("\n%d",number[i]);
 }
